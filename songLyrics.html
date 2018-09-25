@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <title></title>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
+
+    <style>
+      html, pre {
+        font-family: Nanum Pen Script;
+      }
+      body {
+        width: 500px;
+        margin: 0 auto;
+        background-color: #D1E3FF;
+      }
+      pre {
+        line-height: 1.5;
+        letter-spacing: 0.05rem;
+        padding: 1rem;
+        background-color: #FFE7E4;
+        border-radius: 25px;
+      }
+      label {
+        width: 200px;
+        margin-right: 33px;
+      }
+      select {
+        width: 350px;
+        padding: 5px;
+        border-radius: 25px;
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+    <center><h1>♫</h1></center>
+
+    <form>
+      <center><label for="song-choose">song selection:</label>
+      <select id="song-choose" name="song-choose">
+        <option>broken</option>
+        <option>dreams</option>
+        <option>glass houses</option>
+        <option>thru these tears</option>
+        <option>when you're ready</option>
+      </select></center>
+    </form>
+
+    <h2></h2>
+
+    <pre>
+
+    </pre>
+
+    <script>
+        //takes the song selected in the menu
+        var songChoice = document.querySelector('select');
+        var lyricDisplay = document.querySelector('pre');
+        
+        //changes display as song selection changes
+        songChoice.onchange = function() {
+          var song = songChoice.value;
+          updateDisplay(song);
+        };
+
+      //function that gets the chosen song file and displays cooridinating file
+      function updateDisplay(song) {
+        var url = song + ".txt";
+
+        //using fetch API to retrieve data in file
+        fetch(url).then(function(response) {
+          response.text().then(function(text) {
+            lyricDisplay.textContent = text;
+              console.log(text);
+        });
+      });
+};
+//display welcome message on first load
+updateDisplay('intro');
+    </script>
+  </body>
+</html>
